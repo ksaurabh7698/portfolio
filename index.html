@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kumar Saurabh | Assistant Professor & Computer Science Researcher</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            950: '#022c22',
+                        },
+                        cyan: {
+                            400: '#22d3ee',
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                        },
+                        slate: {
+                            850: '#151f32',
+                            950: '#070d19',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .light .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        .glow-emerald {
+            box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.25);
+        }
+        .canvas-container {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        .active-tab {
+            background-color: #10b981 !important;
+            color: #022c22 !important;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 light:bg-slate-50 light:text-slate-900 transition-colors duration-300 min-h-screen selection:bg-emerald-500 selection:text-slate-950">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-emerald-500 text-slate-950 font-bold px-4 py-3 rounded-xl shadow-2xl flex items-center gap-2 text-sm">
+        <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+        <span id="toast-message">Copied to clipboard!</span>
+    </div>
+
+    <!-- Sticky Navigation -->
+    <header class="sticky top-0 z-40 w-full backdrop-blur-md bg-slate-950/85 light:bg-white/85 border-b border-slate-800/80 light:border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center text-slate-950 font-black text-lg shadow-lg group-hover:scale-105 transition-transform">
+                    KS
+                </div>
+                <div>
+                    <h1 class="font-bold text-base sm:text-lg leading-tight tracking-tight text-slate-100 light:text-slate-900">Kumar Saurabh</h1>
+                    <p class="text-xs text-emerald-400 font-mono">M.Tech NIT Rourkela • Assistant Professor</p>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center gap-1 text-sm font-medium text-slate-300 light:text-slate-600">
+                <a href="#about" class="px-3 py-2 rounded-lg hover:text-emerald-400 hover:bg-slate-900 light:hover:bg-slate-100 transition">About</a>
+                <a href="#projects" class="px-3 py-2 rounded-lg hover:text-emerald-400 hover:bg-slate-900 light:hover:bg-slate-100 transition flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Live Simulations
+                </a>
+                <a href="#experience" class="px-3 py-2 rounded-lg hover:text-emerald-400 hover:bg-slate-900 light:hover:bg-slate-100 transition">Experience</a>
+                <a href="#competencies" class="px-3 py-2 rounded-lg hover:text-emerald-400 hover:bg-slate-900 light:hover:bg-slate-100 transition">Competencies</a>
+                <a href="#education" class="px-3 py-2 rounded-lg hover:text-emerald-400 hover:bg-slate-900 light:hover:bg-slate-100 transition">Education</a>
+                <a href="#contact" class="px-3 py-2 rounded-lg hover:text-emerald-400 hover:bg-slate-900 light:hover:bg-slate-100 transition">Contact</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center gap-3">
+                <button id="theme-toggle" class="p-2.5 rounded-xl bg-slate-900 light:bg-slate-200 text-slate-300 light:text-slate-700 hover:text-emerald-400 transition" title="Toggle Theme">
+                    <i data-lucide="sun" class="w-4 h-4 hidden light:block"></i>
+                    <i data-lucide="moon" class="w-4 h-4 block light:hidden"></i>
+                </button>
+                
+                <a href="#projects" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-xl bg-emerald-500 text-slate-950 hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/20">
+                    <i data-lucide="box" class="w-4 h-4"></i>
+                    Launch 3D Visualizer
+                </a>
+
+                <button id="mobile-menu-btn" class="lg:hidden p-2 rounded-xl bg-slate-900 light:bg-slate-200 text-slate-300">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden border-b border-slate-800 light:border-slate-200 bg-slate-950 light:bg-white px-4 pt-2 pb-4 space-y-2">
+            <a href="#about" class="mobile-nav-link block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900">About & Summary</a>
+            <a href="#projects" class="mobile-nav-link block px-3 py-2 rounded-lg text-emerald-400 font-semibold hover:bg-slate-900">Live 3D & ML Projects</a>
+            <a href="#experience" class="mobile-nav-link block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900">Teaching & Industry Roles</a>
+            <a href="#competencies" class="mobile-nav-link block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900">Technical Competencies</a>
+            <a href="#education" class="mobile-nav-link block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900">Education & Achievements</a>
+            <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-lg text-slate-300 hover:bg-slate-900">Contact Details</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 py-10">
+
+        <!-- HERO & PROFESSIONAL SUMMARY SECTION -->
+        <section id="about" class="pt-4 sm:pt-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        Assistant Professor @ Lovely Professional University
+                    </div>
+                    
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-100 light:text-slate-900 leading-none">
+                        Kumar <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-indigo-400">Saurabh</span>
+                    </h1>
+                    
+                    <p class="text-lg sm:text-xl font-medium text-slate-300 light:text-slate-700">
+                        Computer Science Educator, WebGL Developer & AI Cloud Researcher
+                    </p>
+                    
+                    <div class="glass-card p-6 rounded-2xl border-l-4 border-l-emerald-500 space-y-3">
+                        <h3 class="text-xs font-mono uppercase text-emerald-400 tracking-wider font-semibold">Professional Summary</h3>
+                        <p class="text-slate-300 light:text-slate-600 text-sm leading-relaxed">
+                            Dedicated Assistant Professor in Computer Science with an <strong class="text-slate-100 light:text-slate-900">M.Tech from NIT Rourkela</strong> and a strong foundation in theoretical and applied computer science. Proven track record of instructing and mentoring <strong>500+ undergraduate students</strong>. Adept at curriculum design and fostering innovative learning environments with deep subject knowledge in Data Structures, Algorithms, Machine Learning, and Cloud Computing.
+                        </p>
+                    </div>
+
+                    <!-- Quick Contact Chips -->
+                    <div class="flex flex-wrap gap-3 pt-1">
+                        <button onclick="copyToClipboard('kumarsaurabh2225@gmail.com', 'Email address copied!')" class="glass-card hover:border-emerald-500/50 px-3.5 py-2.5 rounded-xl text-xs font-mono text-slate-300 flex items-center gap-2 transition group">
+                            <i data-lucide="mail" class="w-4 h-4 text-emerald-400 group-hover:scale-110 transition"></i>
+                            kumarsaurabh2225@gmail.com
+                            <i data-lucide="copy" class="w-3.5 h-3.5 text-slate-500"></i>
+                        </button>
+                        
+                        <button onclick="copyToClipboard('+917618368160', 'Phone number copied!')" class="glass-card hover:border-emerald-500/50 px-3.5 py-2.5 rounded-xl text-xs font-mono text-slate-300 flex items-center gap-2 transition group">
+                            <i data-lucide="phone" class="w-4 h-4 text-emerald-400 group-hover:scale-110 transition"></i>
+                            +91-7618368160
+                            <i data-lucide="copy" class="w-3.5 h-3.5 text-slate-500"></i>
+                        </button>
+
+                        <a href="https://linkedin.com/in/ksaurabh7698" target="_blank" rel="noopener" class="glass-card hover:border-emerald-500/50 px-3.5 py-2.5 rounded-xl text-xs font-mono text-slate-300 flex items-center gap-2 transition group">
+                            <i data-lucide="linkedin" class="w-4 h-4 text-emerald-400 group-hover:scale-110 transition"></i>
+                            in/ksaurabh7698
+                            <i data-lucide="external-link" class="w-3.5 h-3.5 text-slate-500"></i>
+                        </a>
+
+                        <div class="glass-card px-3.5 py-2.5 rounded-xl text-xs font-mono text-slate-400 flex items-center gap-2">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-cyan-400"></i>
+                            Jalandhar, Punjab
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats Dashboard Grid -->
+                <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+                    <div class="glass-card p-5 rounded-2xl border-t-2 border-t-emerald-500 space-y-2 hover:scale-[1.02] transition">
+                        <div class="text-3xl font-extrabold text-emerald-400 font-mono">500+</div>
+                        <div class="text-xs text-slate-400 font-medium uppercase tracking-wider">Students Mentored</div>
+                        <p class="text-[11px] text-slate-400 leading-tight">Instructed in C++ DSA, Algorithms & Cloud Computing</p>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl border-t-2 border-t-cyan-500 space-y-2 hover:scale-[1.02] transition">
+                        <div class="text-3xl font-extrabold text-cyan-400 font-mono">3x</div>
+                        <div class="text-xs text-slate-400 font-medium uppercase tracking-wider">GATE Qualified</div>
+                        <p class="text-[11px] text-slate-400 leading-tight">National qualifications in 2020, 2021 & 2022</p>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl border-t-2 border-t-indigo-500 space-y-2 hover:scale-[1.02] transition">
+                        <div class="text-3xl font-extrabold text-indigo-400 font-mono">300+</div>
+                        <div class="text-xs text-slate-400 font-medium uppercase tracking-wider">LeetCode Streak</div>
+                        <p class="text-[11px] text-slate-400 leading-tight">Continuous C++ algorithmic problem-solving</p>
+                    </div>
+
+                    <div class="glass-card p-5 rounded-2xl border-t-2 border-t-purple-500 space-y-2 hover:scale-[1.02] transition">
+                        <div class="text-3xl font-extrabold text-purple-400 font-mono">150 Hr</div>
+                        <div class="text-xs text-slate-400 font-medium uppercase tracking-wider">DSA FDP Certified</div>
+                        <p class="text-[11px] text-slate-400 leading-tight">Advanced teaching certification via iamneo</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE PROJECTS & LIVE VISUALIZATIONS SECTION -->
+        <section id="projects" class="space-y-12 pt-4">
+            <div class="border-b border-slate-800 pb-4">
+                <div class="text-emerald-400 font-mono text-xs uppercase tracking-widest mb-1">Embedded Engineering Demonstrations</div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-100 light:text-slate-900">
+                    Interactive Projects & Simulations
+                </h2>
+                <p class="text-slate-400 text-sm mt-1">
+                    Explore live in-browser WebGL renderers, machine learning packet analyzers, and cloud topology inspectors built directly into this portfolio.
+                </p>
+            </div>
+
+            <!-- PROJECT 1: 3D DSA VISUALIZER -->
+            <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 border-emerald-500/30 glow-emerald">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-mono font-semibold border border-emerald-500/30">
+                            FLAGSHIP WEBGL ENGINE
+                        </span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-slate-100 light:text-slate-900 mt-2">
+                            3D Data Structures & Algorithms Visualizer
+                        </h3>
+                        <p class="text-sm text-slate-400 mt-1">
+                            Core Rendering Engine: Three.js | Asset Optimization: Blender | Lighting Prototype: Unreal Engine
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 text-emerald-400 text-xs font-mono border border-slate-800">Three.js</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 text-cyan-400 text-xs font-mono border border-slate-800">Blender</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 text-indigo-400 text-xs font-mono border border-slate-800">Unreal Engine</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 text-purple-400 text-xs font-mono border border-slate-800">InstancedMesh</span>
+                    </div>
+                </div>
+
+                <p class="text-xs sm:text-sm text-slate-300 light:text-slate-600 leading-relaxed">
+                    Designed to help computer science students intuitively grasp spatial structures—such as balanced trees (Red-Black, B-Trees) and graph traversals—in real time directly in the browser without heavy downloads. Features a custom step-by-step execution queue decoupling algorithm logic from frame rendering, allowing users to pause, rewind, and inspect pointer reassignments dynamically.
+                </p>
+
+                <!-- Live 3D Interactive Canvas & Controls -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    
+                    <!-- Canvas Canvas Box -->
+                    <div class="lg:col-span-8 space-y-3">
+                        <div class="canvas-container bg-slate-950 border border-slate-800 shadow-2xl relative" id="dsa-canvas-wrapper">
+                            <!-- Overlay HUD Stats -->
+                            <div class="absolute top-3 left-3 z-10 glass-card px-3.5 py-2.5 rounded-xl text-xs font-mono space-y-1 border-slate-700/80">
+                                <div class="flex items-center gap-2 text-emerald-400 font-bold">
+                                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    <span>Frame Rate: <span id="dsa-fps" class="text-emerald-300">60 FPS</span></span>
+                                </div>
+                                <div class="text-slate-300">Active Nodes: <span id="dsa-node-count" class="text-cyan-400 font-bold">15</span></div>
+                                <div class="text-slate-300">Draw Calls: <span id="dsa-draw-calls" class="text-indigo-400 font-bold">1 Call</span></div>
+                                <div class="text-[10px] text-slate-400">Optimization: <span id="dsa-mode-tag" class="text-emerald-400">InstancedMesh Active</span></div>
+                            </div>
+
+                            <!-- Camera Orbit Tooltip -->
+                            <div class="absolute bottom-3 left-3 z-10 glass-card px-3 py-1.5 rounded-lg text-[11px] text-slate-400 font-mono flex items-center gap-1.5">
+                                <i data-lucide="move" class="w-3.5 h-3.5 text-emerald-400"></i>
+                                Click & Drag to Orbit 3D View
+                            </div>
+
+                            <canvas id="dsa-3d-canvas" class="w-full h-full cursor-grab active:cursor-grabbing"></canvas>
+                        </div>
+
+                        <!-- Simulation Control Toolbar -->
+                        <div class="glass-card p-4 rounded-xl flex flex-wrap items-center justify-between gap-3">
+                            <div class="flex flex-wrap items-center gap-2">
+                                <button id="btn-add-node" class="px-3 py-2 rounded-lg bg-emerald-500 text-slate-950 text-xs font-bold hover:bg-emerald-400 transition flex items-center gap-1.5">
+                                    <i data-lucide="plus-circle" class="w-4 h-4"></i> Insert Random Node
+                                </button>
+                                
+                                <select id="select-algorithm" class="px-3 py-2 rounded-lg bg-slate-900 border border-slate-800 text-slate-200 text-xs font-mono">
+                                    <option value="inorder">In-Order Traversal</option>
+                                    <option value="bfs">Breadth-First (BFS)</option>
+                                    <option value="dfs">Depth-First (DFS)</option>
+                                </select>
+
+                                <button id="btn-traverse" class="px-3 py-2 rounded-lg bg-cyan-600 text-slate-100 text-xs font-semibold hover:bg-cyan-500 transition flex items-center gap-1.5">
+                                    <i data-lucide="play" class="w-4 h-4"></i> Run Traversal Queue
+                                </button>
+                                
+                                <button id="btn-reset-tree" class="px-3 py-2 rounded-lg bg-slate-800 text-slate-300 text-xs font-semibold hover:bg-slate-700 transition">
+                                    Reset Tree
+                                </button>
+                            </div>
+
+                            <!-- Instanced vs Standard Toggle -->
+                            <div class="flex items-center gap-2">
+                                <label class="text-[11px] font-mono text-slate-400">Render Pipeline:</label>
+                                <button id="btn-toggle-opt" class="px-3 py-1.5 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-mono hover:bg-emerald-500/30 transition">
+                                    InstancedMesh (60 FPS)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Technical Bottleneck & Resolution Panel -->
+                    <div class="lg:col-span-4 space-y-4">
+                        <div class="glass-card p-5 rounded-2xl space-y-3 border-l-4 border-l-emerald-500">
+                            <h4 class="font-bold text-slate-100 text-sm flex items-center gap-2">
+                                <i data-lucide="wrench" class="w-4 h-4 text-emerald-400"></i>
+                                Technical Bottleneck & Resolution
+                            </h4>
+                            
+                            <div class="text-xs text-slate-300 leading-relaxed space-y-2">
+                                <p>
+                                    <strong class="text-amber-400">The Problem:</strong> When rendering over 1,000 nodes with animated edge re-balancing, frame rates dropped below 15 FPS due to creating individual meshes and materials for every node and edge (generating over 1,000 draw calls per frame).
+                                </p>
+                                <p>
+                                    <strong class="text-emerald-400">Investigated & Fixed:</strong> Used Chrome DevTools and Three.js <code class="font-mono bg-slate-900 px-1 py-0.5 rounded text-cyan-300">WebGLRenderer.info</code> to trace the draw-call overhead. Refactored the layer to use <code class="font-mono bg-slate-900 px-1 py-0.5 rounded text-emerald-300">THREE.InstancedMesh</code> for nodes (consolidating hundreds of calls into 1) and merged dynamic edge lines into a single <code class="font-mono bg-slate-900 px-1 py-0.5 rounded text-indigo-300">BufferGeometry</code>.
+                                </p>
+                                <div class="pt-2 border-t border-slate-800 text-slate-400 text-[11px]">
+                                    <strong>Impact:</strong> Locked <strong>60 FPS</strong> smoothly handling 2,500+ active tree nodes during recursive rotations.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step Execution Log -->
+                        <div class="glass-card p-4 rounded-xl space-y-2">
+                            <div class="text-xs font-mono text-emerald-400 flex items-center justify-between">
+                                <span>Execution State Engine</span>
+                                <span id="dsa-queue-status" class="px-2 py-0.5 rounded bg-slate-900 text-slate-400">Idle</span>
+                            </div>
+                            <div id="dsa-log" class="font-mono text-[11px] text-slate-400 bg-slate-950 p-2.5 rounded-lg h-28 overflow-y-auto space-y-1 border border-slate-800">
+                                <div>[Engine] Tree initialized with 15 nodes.</div>
+                                <div>[Renderer] THREE.InstancedMesh active.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJECT 2: ML FOR THREAT DETECTION IN IOT NETWORKS -->
+            <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 border-cyan-500/30">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-cyan-500/20 text-cyan-300 text-xs font-mono font-semibold border border-cyan-500/30">
+                            M.TECH THESIS @ NIT ROURKELA
+                        </span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-slate-100 light:text-slate-900 mt-2">
+                            Machine Learning for Threat Detection in IoT Networks
+                        </h3>
+                        <p class="text-sm text-slate-400 mt-1">
+                            Technologies: Python, TensorFlow, Random Forest, XGBoost, Deep Neural Networks, Google Cloud Platform (GCP)
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 text-cyan-400 text-xs font-mono border border-slate-800">TensorFlow</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 text-emerald-400 text-xs font-mono border border-slate-800">Random Forest</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 text-yellow-400 text-xs font-mono border border-slate-800">XGBoost</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 text-purple-400 text-xs font-mono border border-slate-800">GCP</span>
+                    </div>
+                </div>
+
+                <p class="text-xs sm:text-sm text-slate-300 light:text-slate-600 leading-relaxed">
+                    Developed robust machine learning and deep learning models to identify and mitigate cyber attack vectors (DDoS, Spoofing, Port Scanning, Malware) within IoT edge environments. Preprocessed network security traffic datasets using GCP infrastructure to analyze feature importance and classification latency.
+                </p>
+
+                <!-- Interactive Packet & Classifier Simulator -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- Controls & Model Selector -->
+                    <div class="lg:col-span-5 space-y-4">
+                        <div class="glass-card p-5 rounded-xl space-y-4">
+                            <h4 class="font-bold text-xs text-slate-200 uppercase tracking-wider flex items-center justify-between">
+                                <span>Active Classifier Model</span>
+                                <span class="text-cyan-400 font-mono text-[10px]">Real-Time Inference</span>
+                            </h4>
+                            
+                            <div class="grid grid-cols-3 gap-2" id="model-selector">
+                                <button data-model="rf" class="model-btn active px-3 py-2 rounded-lg bg-emerald-500 text-slate-950 font-bold text-xs transition">
+                                    Random Forest
+                                </button>
+                                <button data-model="xgb" class="model-btn px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold text-xs transition">
+                                    XGBoost
+                                </button>
+                                <button data-model="dnn" class="model-btn px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold text-xs transition">
+                                    Neural Net
+                                </button>
+                            </div>
+
+                            <!-- Metrics Dashboard -->
+                            <div class="grid grid-cols-3 gap-2 text-center pt-2 border-t border-slate-800">
+                                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                                    <div class="text-[10px] text-slate-400 uppercase font-mono">Accuracy</div>
+                                    <div id="metric-acc" class="text-base font-bold text-emerald-400 font-mono">98.4%</div>
+                                </div>
+                                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                                    <div class="text-[10px] text-slate-400 uppercase font-mono">Precision</div>
+                                    <div id="metric-prec" class="text-base font-bold text-cyan-400 font-mono">97.8%</div>
+                                </div>
+                                <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                                    <div class="text-[10px] text-slate-400 uppercase font-mono">F1 Score</div>
+                                    <div id="metric-f1" class="text-base font-bold text-indigo-400 font-mono">98.1%</div>
+                                </div>
+                            </div>
+
+                            <!-- Interactive Confusion Matrix Breakdown -->
+                            <div class="bg-slate-950 p-3 rounded-lg border border-slate-800 space-y-1.5 font-mono text-[11px]">
+                                <div class="text-slate-400 font-semibold flex items-center justify-between text-[10px]">
+                                    <span>Confusion Matrix (Simulated validation set)</span>
+                                    <span id="matrix-model-tag" class="text-cyan-400">Random Forest</span>
+                                </div>
+                                <div class="grid grid-cols-2 gap-1 text-center font-bold">
+                                    <div class="bg-emerald-950/60 text-emerald-300 p-1.5 rounded border border-emerald-800/40">TP: <span id="cm-tp">1,420</span></div>
+                                    <div class="bg-rose-950/60 text-rose-300 p-1.5 rounded border border-rose-800/40">FP: <span id="cm-fp">24</span></div>
+                                    <div class="bg-rose-950/60 text-rose-300 p-1.5 rounded border border-rose-800/40">FN: <span id="cm-fn">18</span></div>
+                                    <div class="bg-emerald-950/60 text-emerald-300 p-1.5 rounded border border-emerald-800/40">TN: <span id="cm-tn">1,538</span></div>
+                                </div>
+                            </div>
+
+                            <button id="btn-send-packet" class="w-full py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-indigo-500 text-slate-950 font-bold text-xs hover:opacity-90 transition flex items-center justify-center gap-2 shadow-lg shadow-cyan-500/20">
+                                <i data-lucide="radio" class="w-4 h-4"></i>
+                                Inject & Classify Simulated IoT Packet
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Live Packet Log Console -->
+                    <div class="lg:col-span-7 glass-card p-5 rounded-xl space-y-3">
+                        <div class="flex items-center justify-between border-b border-slate-800 pb-2">
+                            <span class="text-xs font-mono text-slate-300 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                                Live IoT Traffic Inspection Console
+                            </span>
+                            <span class="text-[11px] font-mono text-slate-500">Port 8883 (MQTT / CoAP)</span>
+                        </div>
+
+                        <div id="packet-log" class="space-y-2 h-72 overflow-y-auto pr-1 font-mono text-xs">
+                            <div class="p-3 rounded-lg border border-emerald-800/60 bg-emerald-950/30 text-emerald-200 flex items-center justify-between">
+                                <div class="space-y-0.5">
+                                    <div class="font-bold flex items-center gap-1.5">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                        Normal MQTT Sensor Payload
+                                    </div>
+                                    <div class="text-[10px] text-slate-400">Classified via Random Forest • Latency: 1.2ms</div>
+                                </div>
+                                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold text-[10px]">
+                                    NORMAL (99.4%)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROJECT 3: CLOUD & VIRTUALIZATION LAB ARCHITECTURE -->
+            <div class="glass-card rounded-3xl p-6 sm:p-8 space-y-6 border-indigo-500/30">
+                <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800/80 pb-4">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-mono font-semibold border border-indigo-500/30">
+                            ACADEMIC CLOUD INFRASTRUCTURE
+                        </span>
+                        <h3 class="text-2xl sm:text-3xl font-bold text-slate-100 light:text-slate-900 mt-2">
+                            Cloud & Virtualization Academic Lab Architecture
+                        </h3>
+                        <p class="text-sm text-slate-400 mt-1">
+                            Stack: Apache CloudStack, Kubernetes, KVM Virtualization, Google Cloud Platform (GCP)
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 text-indigo-400 text-xs font-mono border border-slate-800">Apache CloudStack</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 text-cyan-400 text-xs font-mono border border-slate-800">Kubernetes</span>
+                        <span class="px-2.5 py-1 rounded-md bg-slate-900 text-emerald-400 text-xs font-mono border border-slate-800">KVM</span>
+                    </div>
+                </div>
+
+                <p class="text-xs sm:text-sm text-slate-300 light:text-slate-600 leading-relaxed">
+                    Designed and managed hands-on cloud computing lab topologies and containerized sandbox environments for undergraduate CSE students at LPU. Integrated private CloudStack management clusters with public GCP backends to deliver scalable virtualized learning environments.
+                </p>
+
+                <!-- Interactive Cloud Topology Map -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <button class="cloud-node-btn glass-card p-4 rounded-xl text-left border-l-4 border-l-indigo-500 hover:border-indigo-400 transition space-y-2 group" onclick="inspectCloudNode('controller')">
+                        <div class="flex items-center justify-between">
+                            <i data-lucide="server" class="w-6 h-6 text-indigo-400 group-hover:scale-110 transition"></i>
+                            <span class="text-[10px] font-mono bg-indigo-500/20 text-indigo-300 px-2 py-0.5 rounded">Management</span>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-100">Management Server</h4>
+                        <p class="text-xs text-slate-400">CloudStack Orchestration Node</p>
+                    </button>
+
+                    <button class="cloud-node-btn glass-card p-4 rounded-xl text-left border-l-4 border-l-cyan-500 hover:border-cyan-400 transition space-y-2 group" onclick="inspectCloudNode('k8s')">
+                        <div class="flex items-center justify-between">
+                            <i data-lucide="container" class="w-6 h-6 text-cyan-400 group-hover:scale-110 transition"></i>
+                            <span class="text-[10px] font-mono bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded">Cluster</span>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-100">Kubernetes Pods</h4>
+                        <p class="text-xs text-slate-400">Microservice Course Sandboxes</p>
+                    </button>
+
+                    <button class="cloud-node-btn glass-card p-4 rounded-xl text-left border-l-4 border-l-emerald-500 hover:border-emerald-400 transition space-y-2 group" onclick="inspectCloudNode('vms')">
+                        <div class="flex items-center justify-between">
+                            <i data-lucide="cpu" class="w-6 h-6 text-emerald-400 group-hover:scale-110 transition"></i>
+                            <span class="text-[10px] font-mono bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">50+ Instances</span>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-100">KVM Hypervisor Host</h4>
+                        <p class="text-xs text-slate-400">Student Linux VM Pool</p>
+                    </button>
+
+                    <button class="cloud-node-btn glass-card p-4 rounded-xl text-left border-l-4 border-l-purple-500 hover:border-purple-400 transition space-y-2 group" onclick="inspectCloudNode('gcp')">
+                        <div class="flex items-center justify-between">
+                            <i data-lucide="cloud" class="w-6 h-6 text-purple-400 group-hover:scale-110 transition"></i>
+                            <span class="text-[10px] font-mono bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded">Hybrid Cloud</span>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-100">GCP Hybrid Gateway</h4>
+                        <p class="text-xs text-slate-400">Cloud Storage & Big Data API</p>
+                    </button>
+                </div>
+
+                <!-- Inspector Telemetry Output -->
+                <div id="cloud-inspector" class="bg-slate-950 p-4 rounded-xl border border-slate-800 font-mono text-xs text-slate-300 space-y-2">
+                    <div class="text-emerald-400 font-bold flex items-center gap-2">
+                        <i data-lucide="terminal" class="w-4 h-4"></i>
+                        Topology Inspector: <span id="node-title">Click any node above to inspect architecture role</span>
+                    </div>
+                    <p id="node-desc" class="text-slate-400">Select a component to inspect resource allocation, hypervisor config, and course lab setup.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE TIMELINE (WITH CATEGORY FILTERS) -->
+        <section id="experience" class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <div class="text-emerald-400 font-mono text-xs uppercase tracking-widest mb-1">Career Journey</div>
+                    <h2 class="text-3xl font-bold text-slate-100 light:text-slate-900">Academic & Applied Experience</h2>
+                </div>
+
+                <!-- Filter Tabs -->
+                <div class="flex items-center gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs font-medium">
+                    <button onclick="filterExperience('all')" id="exp-tab-all" class="exp-tab active-tab px-3 py-1.5 rounded-lg transition">All Roles</button>
+                    <button onclick="filterExperience('teaching')" id="exp-tab-teaching" class="exp-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 transition">Teaching</button>
+                    <button onclick="filterExperience('research')" id="exp-tab-research" class="exp-tab px-3 py-1.5 rounded-lg text-slate-400 hover:text-slate-200 transition">Research & Industry</button>
+                </div>
+            </div>
+
+            <!-- Timeline Cards Container -->
+            <div class="space-y-6">
+                <!-- LPU Assistant Professor -->
+                <div class="exp-item exp-teaching glass-card rounded-2xl p-6 sm:p-8 space-y-4 border-l-4 border-l-emerald-500 transition">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="text-xl font-bold text-slate-100">Assistant Professor</h3>
+                                <span class="px-2.5 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-mono font-semibold">Teaching & Academic Admin</span>
+                            </div>
+                            <p class="text-emerald-400 text-sm font-medium">Lovely Professional University (LPU)</p>
+                        </div>
+                        <div class="text-left sm:text-right">
+                            <span class="px-3 py-1 rounded-full bg-slate-900 text-emerald-400 text-xs font-mono border border-slate-800">
+                                Jun 2024 – Present
+                            </span>
+                            <div class="text-[11px] text-slate-400 font-mono mt-1">Jalandhar, Punjab</div>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300 light:text-slate-600">
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span>Instruct and mentor a cohort of <strong>500+ undergraduate students</strong> by designing and delivering interactive lectures, lab sessions, and comprehensive assessments.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span>Serve as primary faculty for core technical subjects including <strong>Data Structures and Algorithms (C++)</strong>, Design & Analysis of Algorithms, Java, and Apache CloudStack.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span>Contribute to curriculum design and pedagogical enhancements to ensure academic rigor and industry alignment.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span>Guide <strong>30+ students</strong> in developing academic projects, refining coding practices, competitive programming, and career development.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5"></i>
+                            <span>Execute department-level administrative responsibilities, including question paper setting, secure invigilation, and accurate performance evaluation.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Outlier AI Model Trainer -->
+                <div class="exp-item exp-research glass-card rounded-2xl p-6 sm:p-8 space-y-4 border-l-4 border-l-purple-500 transition">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="text-xl font-bold text-slate-100">Freelance AI Model Trainer</h3>
+                                <span class="px-2.5 py-0.5 rounded bg-purple-500/20 text-purple-300 text-[10px] font-mono font-semibold">Industry AI</span>
+                            </div>
+                            <p class="text-purple-400 text-sm font-medium">Outlier</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-slate-900 text-purple-400 text-xs font-mono border border-slate-800 self-start sm:self-auto">
+                            Sept 2024 – Present
+                        </span>
+                    </div>
+
+                    <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300 light:text-slate-600">
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-purple-400 shrink-0 mt-0.5"></i>
+                            <span>Enhance Artificial Intelligence model training workflows through rigorous evaluation, testing, and refinement of complex model outputs.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-purple-400 shrink-0 mt-0.5"></i>
+                            <span>Apply practical machine learning methodologies to continuously improve the accuracy, safety, code reasoning, and contextual relevance of AI systems.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- NIT Rourkela Graduate Researcher -->
+                <div class="exp-item exp-research glass-card rounded-2xl p-6 sm:p-8 space-y-4 border-l-4 border-l-cyan-500 transition">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <h3 class="text-xl font-bold text-slate-100">Graduate Researcher</h3>
+                                <span class="px-2.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 text-[10px] font-mono font-semibold">M.Tech Research</span>
+                            </div>
+                            <p class="text-cyan-400 text-sm font-medium">National Institute of Technology (NIT) Rourkela</p>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-slate-900 text-cyan-400 text-xs font-mono border border-slate-800 self-start sm:self-auto">
+                            Jul 2023 – Jun 2024
+                        </span>
+                    </div>
+
+                    <ul class="space-y-2.5 text-xs sm:text-sm text-slate-300 light:text-slate-600">
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                            <span>Developed robust machine learning models utilizing <strong>Random Forests, XGBoost, and Deep Neural Networks</strong> to identify and mitigate cyber attacks within IoT environments.</span>
+                        </li>
+                        <li class="flex items-start gap-2.5">
+                            <i data-lucide="chevron-right" class="w-4 h-4 text-cyan-400 shrink-0 mt-0.5"></i>
+                            <span>Leveraged Python, TensorFlow, Pandas, NumPy, and Google Cloud Platform (GCP) to process network security datasets and contribute to cybersecurity research.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- CORE COMPETENCIES MATRIX (FILTERABLE) -->
+        <section id="competencies" class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-slate-800 pb-4">
+                <div>
+                    <div class="text-emerald-400 font-mono text-xs uppercase tracking-widest mb-1">Knowledge Domains</div>
+                    <h2 class="text-3xl font-bold text-slate-100 light:text-slate-900">Core Academic & Technical Competencies</h2>
+                </div>
+
+                <!-- Skill Filter Chips -->
+                <div class="flex flex-wrap items-center gap-1.5 text-xs font-mono">
+                    <button onclick="filterSkills('all')" id="skill-btn-all" class="skill-btn active-tab px-3 py-1.5 rounded-lg transition">All</button>
+                    <button onclick="filterSkills('teaching')" id="skill-btn-teaching" class="skill-btn px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800 transition">Teaching</button>
+                    <button onclick="filterSkills('prog')" id="skill-btn-prog" class="skill-btn px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800 transition">Programming & Cloud</button>
+                    <button onclick="filterSkills('tools')" id="skill-btn-tools" class="skill-btn px-3 py-1.5 rounded-lg bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800 transition">Tools & Libraries</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1: Core Teaching -->
+                <div class="skill-card skill-teaching glass-card p-6 rounded-2xl space-y-4">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                        <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-100 text-base">Core Teaching Subjects</h3>
+                    <ul class="space-y-2 text-xs font-mono text-slate-300">
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center gap-1.5">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Data Structures & Algorithms
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center gap-1.5">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Design & Analysis of Algorithms
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center gap-1.5">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Artificial Intelligence
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center gap-1.5">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Machine Learning
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center gap-1.5">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Cybersecurity
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center gap-1.5">
+                            <i data-lucide="check" class="w-3.5 h-3.5 text-emerald-400"></i> Computational Methods
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Languages & Cloud -->
+                <div class="skill-card skill-prog glass-card p-6 rounded-2xl space-y-4">
+                    <div class="w-10 h-10 rounded-xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center">
+                        <i data-lucide="code-2" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-100 text-base">Programming & Cloud</h3>
+                    <ul class="space-y-2 text-xs font-mono text-slate-300">
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center justify-between">
+                            <span>C / C++</span>
+                            <span class="text-[10px] text-emerald-400">Advanced</span>
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center justify-between">
+                            <span>Java</span>
+                            <span class="text-[10px] text-cyan-400">OOP</span>
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center justify-between">
+                            <span>Python</span>
+                            <span class="text-[10px] text-yellow-400">ML / Data</span>
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center justify-between">
+                            <span>Google Cloud Platform</span>
+                            <span class="text-[10px] text-purple-400">GCP</span>
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center justify-between">
+                            <span>Kubernetes</span>
+                            <span class="text-[10px] text-indigo-400">Containers</span>
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center justify-between">
+                            <span>Apache CloudStack</span>
+                            <span class="text-[10px] text-cyan-400">IaaS</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Tools & Graphics -->
+                <div class="skill-card skill-tools glass-card p-6 rounded-2xl space-y-4">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-500/10 text-indigo-400 flex items-center justify-center">
+                        <i data-lucide="box" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-100 text-base">Tools & Graphics</h3>
+                    <ul class="space-y-2 text-xs font-mono text-slate-300">
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center gap-1.5">
+                            <i data-lucide="cpu" class="w-3.5 h-3.5 text-indigo-400"></i> Three.js / WebGL
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center gap-1.5">
+                            <i data-lucide="box" class="w-3.5 h-3.5 text-cyan-400"></i> Blender (Low-Poly 3D)
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center gap-1.5">
+                            <i data-lucide="gamepad-2" class="w-3.5 h-3.5 text-purple-400"></i> Unreal Engine
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center gap-1.5">
+                            <i data-lucide="layers" class="w-3.5 h-3.5 text-emerald-400"></i> TensorFlow / Pandas / NumPy
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center gap-1.5">
+                            <i data-lucide="terminal" class="w-3.5 h-3.5 text-slate-400"></i> Linux CLI & Git / GitHub
+                        </li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800 flex items-center gap-1.5">
+                            <i data-lucide="file-code" class="w-3.5 h-3.5 text-cyan-400"></i> Visual Studio Code
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Card 4: Academic Administration -->
+                <div class="skill-card skill-teaching glass-card p-6 rounded-2xl space-y-4">
+                    <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center">
+                        <i data-lucide="file-text" class="w-5 h-5"></i>
+                    </div>
+                    <h3 class="font-bold text-slate-100 text-base">Academic Administration</h3>
+                    <ul class="space-y-2 text-xs font-mono text-slate-300">
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800">Curriculum Design</li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800">Student Mentoring & Guidance</li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800">Academic Counseling</li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800">Question Paper Setting</li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800">Secure Invigilation</li>
+                        <li class="bg-slate-950 px-2.5 py-1.5 rounded border border-slate-800">Performance Evaluation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION & ACHIEVEMENTS SECTION -->
+        <section id="education" class="space-y-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Education Column -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div>
+                        <div class="text-emerald-400 font-mono text-xs uppercase tracking-widest mb-1">Academic Background</div>
+                        <h2 class="text-3xl font-bold text-slate-100 light:text-slate-900">Education</h2>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- M.Tech -->
+                        <div class="glass-card p-6 rounded-2xl border-l-4 border-l-emerald-500 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2.5 py-1 rounded bg-emerald-500/10 text-emerald-400 text-xs font-mono font-semibold">NIT Rourkela</span>
+                                <span class="text-xs text-slate-400 font-mono">CGPA: 7.64</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-100">Master of Technology (M.Tech) in Computer Science & Engineering</h3>
+                            <p class="text-xs text-slate-400">National Institute of Technology Rourkela</p>
+                            <div class="text-xs text-slate-300 bg-slate-950 p-3 rounded-xl border border-slate-800">
+                                <strong class="text-emerald-400 font-mono">Thesis Topic:</strong> Machine Learning for Threat Detection in IoT Networks
+                            </div>
+                        </div>
+
+                        <!-- B.Tech -->
+                        <div class="glass-card p-6 rounded-2xl border-l-4 border-l-cyan-500 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="px-2.5 py-1 rounded bg-cyan-500/10 text-cyan-400 text-xs font-mono font-semibold">REC Bijnor</span>
+                                <span class="text-xs text-slate-400 font-mono">CGPA: 7.64</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-100">Bachelor of Technology (B.Tech) in Information Technology</h3>
+                            <p class="text-xs text-slate-400">Rajkiya Engineering College, Bijnor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements & Certifications Column -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div>
+                        <div class="text-emerald-400 font-mono text-xs uppercase tracking-widest mb-1">Honors & Certifications</div>
+                        <h2 class="text-3xl font-bold text-slate-100 light:text-slate-900">Certifications & Achievements</h2>
+                    </div>
+
+                    <div class="space-y-3">
+                        <!-- GATE Qualification -->
+                        <div class="glass-card p-4 rounded-xl flex items-start gap-4 hover:border-amber-500/40 transition">
+                            <div class="p-3 rounded-xl bg-amber-500/10 text-amber-400 shrink-0">
+                                <i data-lucide="award" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center justify-between">
+                                    <h4 class="font-bold text-slate-100 text-base">Qualified GATE (3x Consecutive)</h4>
+                                    <span class="text-[10px] font-mono text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">2020, 2021, 2022</span>
+                                </div>
+                                <p class="text-xs text-slate-400 mt-1">National Level Graduate Aptitude Test in Engineering in Computer Science.</p>
+                            </div>
+                        </div>
+
+                        <!-- LeetCode Streak -->
+                        <div class="glass-card p-4 rounded-xl flex items-start gap-4 hover:border-emerald-500/40 transition">
+                            <div class="p-3 rounded-xl bg-emerald-500/10 text-emerald-400 shrink-0">
+                                <i data-lucide="flame" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-100 text-base">300+ Days LeetCode Problem Solving Streak</h4>
+                                <p class="text-xs text-slate-400 mt-1">Demonstrated continuous coding proficiency by solving algorithms for 300+ days using C++.</p>
+                            </div>
+                        </div>
+
+                        <!-- Faculty Certification -->
+                        <div class="glass-card p-4 rounded-xl flex items-start gap-4 hover:border-indigo-500/40 transition">
+                            <div class="p-3 rounded-xl bg-indigo-500/10 text-indigo-400 shrink-0">
+                                <i data-lucide="shield-check" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-100 text-base">150 Hours Advanced DSA Faculty Development</h4>
+                                <p class="text-xs text-slate-400 mt-1">Earned formal faculty certification for completing 150 hours of DSA training via iamneo platform under LPU.</p>
+                            </div>
+                        </div>
+
+                        <!-- GCP Badges -->
+                        <div class="glass-card p-4 rounded-xl flex items-start gap-4 hover:border-cyan-500/40 transition">
+                            <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 shrink-0">
+                                <i data-lucide="cloud" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-100 text-base">8+ Google Cloud Badges & 32+ Hr Bootcamp</h4>
+                                <p class="text-xs text-slate-400 mt-1">Includes Google Cloud Core Infrastructure & Generative AI Fundamentals badges plus an intensive 32+ hour Google Cloud Bootcamp.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT & DIRECT CONNECT SECTION -->
+        <section id="contact" class="space-y-8 pt-4">
+            <div class="glass-card rounded-3xl p-8 sm:p-12 border-emerald-500/30 text-center max-w-4xl mx-auto space-y-6 glow-emerald">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-500 to-cyan-500 text-slate-950 flex items-center justify-center mx-auto shadow-lg">
+                    <i data-lucide="mail-check" class="w-8 h-8"></i>
+                </div>
+
+                <div class="space-y-2">
+                    <h2 class="text-3xl font-extrabold text-slate-100 light:text-slate-900">Get In Touch</h2>
+                    <p class="text-slate-400 text-sm max-w-xl mx-auto">
+                        Interested in academic collaboration, computer science mentoring, technical research, or WebGL / Cloud engineering discussions? Contact me directly.
+                    </p>
+                </div>
+
+                <!-- Contact Action Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-left">
+                    <button onclick="copyToClipboard('kumarsaurabh2225@gmail.com', 'Email copied to clipboard!')" class="glass-card p-4 rounded-2xl hover:border-emerald-500/50 transition flex items-center gap-3 group">
+                        <div class="p-3 rounded-xl bg-emerald-500/10 text-emerald-400 group-hover:scale-110 transition">
+                            <i data-lucide="mail" class="w-5 h-5"></i>
+                        </div>
+                        <div class="overflow-hidden">
+                            <div class="text-[10px] uppercase font-mono text-slate-400">Email Address</div>
+                            <div class="text-xs font-bold text-slate-200 truncate">kumarsaurabh2225@gmail.com</div>
+                        </div>
+                    </button>
+
+                    <button onclick="copyToClipboard('+917618368160', 'Phone number copied!')" class="glass-card p-4 rounded-2xl hover:border-emerald-500/50 transition flex items-center gap-3 group">
+                        <div class="p-3 rounded-xl bg-cyan-500/10 text-cyan-400 group-hover:scale-110 transition">
+                            <i data-lucide="phone" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="text-[10px] uppercase font-mono text-slate-400">Phone / WhatsApp</div>
+                            <div class="text-xs font-bold text-slate-200">+91-7618368160</div>
+                        </div>
+                    </button>
+
+                    <a href="https://linkedin.com/in/ksaurabh7698" target="_blank" rel="noopener" class="glass-card p-4 rounded-2xl hover:border-emerald-500/50 transition flex items-center gap-3 group">
+                        <div class="p-3 rounded-xl bg-indigo-500/10 text-indigo-400 group-hover:scale-110 transition">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="text-[10px] uppercase font-mono text-slate-400">LinkedIn Profile</div>
+                            <div class="text-xs font-bold text-slate-200">ksaurabh7698</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 bg-slate-950 py-8 text-center text-xs text-slate-500 font-mono">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+                © <span id="year">2026</span> Kumar Saurabh — Assistant Professor in CSE (M.Tech NIT Rourkela)
+            </div>
+            <div class="flex items-center gap-4 text-slate-400">
+                <span>Built with HTML5 & Three.js</span>
+                <span>•</span>
+                <a href="#about" class="hover:text-emerald-400 transition">Back to top ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC FOR SIMULATIONS & INTERACTIVITY -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+            document.documentElement.classList.toggle('light');
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // Clipboard Helper
+        function copyToClipboard(text, message) {
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text);
+            } else {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+            }
+            showToast(message || 'Copied to clipboard!');
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            toastMessage.textContent = msg;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // Filter Experience Items
+        function filterExperience(type) {
+            document.querySelectorAll('.exp-tab').forEach(tab => {
+                tab.classList.remove('active-tab');
+                tab.classList.add('text-slate-400');
+            });
+            const activeTab = document.getElementById(`exp-tab-${type}`);
+            if (activeTab) {
+                activeTab.classList.add('active-tab');
+                activeTab.classList.remove('text-slate-400');
+            }
+
+            document.querySelectorAll('.exp-item').forEach(item => {
+                if (type === 'all') {
+                    item.style.display = 'block';
+                } else {
+                    if (item.classList.contains(`exp-${type}`)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Filter Competencies Category
+        function filterSkills(category) {
+            document.querySelectorAll('.skill-btn').forEach(btn => {
+                btn.classList.remove('active-tab');
+                btn.classList.add('bg-slate-900', 'text-slate-400');
+            });
+            const activeBtn = document.getElementById(`skill-btn-${category}`);
+            if (activeBtn) {
+                activeBtn.classList.add('active-tab');
+                activeBtn.classList.remove('bg-slate-900', 'text-slate-400');
+            }
+
+            document.querySelectorAll('.skill-card').forEach(card => {
+                if (category === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    if (card.classList.contains(`skill-${category}`)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // ==========================================
+        // PROJECT 1: THREE.JS 3D DSA VISUALIZER
+        // ==========================================
+        let scene, camera, renderer, instancedMesh, normalGroup;
+        let isInstancedMode = true;
+        let treeNodes = [];
+        let isAnimating = false;
+
+        // Orbit control variables
+        let isMouseDown = false;
+        let mouseX = 0, mouseY = 0;
+        let targetRotationX = 0.3, targetRotationY = 0.4;
+        let currentRotationX = 0.3, currentRotationY = 0.4;
+        const cameraDistance = 22;
+
+        function init3DDSAVisualizer() {
+            const wrapper = document.getElementById('dsa-canvas-wrapper');
+            const canvas = document.getElementById('dsa-3d-canvas');
+            if (!wrapper || !canvas) return;
+
+            const width = wrapper.clientWidth;
+            const height = wrapper.clientHeight;
+
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x070d19);
+
+            camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Lighting setup
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
+            scene.add(ambientLight);
+
+            const dirLight = new THREE.DirectionalLight(0x10b981, 1.2);
+            dirLight.position.set(10, 20, 15);
+            scene.add(dirLight);
+
+            const pointLight = new THREE.PointLight(0x06b6d4, 1, 50);
+            pointLight.position.set(-10, -10, -10);
+            scene.add(pointLight);
+
+            normalGroup = new THREE.Group();
+            scene.add(normalGroup);
+
+            // Generate initial BST node set
+            generateInitialBSTData(15);
+            build3DRendererTree();
+
+            // Setup Mouse Camera Controls
+            canvas.addEventListener('mousedown', (e) => {
+                isMouseDown = true;
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            window.addEventListener('mouseup', () => {
+                isMouseDown = false;
+            });
+
+            canvas.addEventListener('mousemove', (e) => {
+                if (!isMouseDown) return;
+                const deltaX = e.clientX - mouseX;
+                const deltaY = e.clientY - mouseY;
+                targetRotationY += deltaX * 0.005;
+                targetRotationX += deltaY * 0.005;
+                targetRotationX = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, targetRotationX));
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            window.addEventListener('resize', onWindowResize);
+            animateDSA();
+        }
+
+        function generateInitialBSTData(count) {
+            treeNodes = [];
+            const values = [50, 25, 75, 12, 37, 62, 87, 6, 18, 30, 43, 55, 68, 80, 95];
+            
+            values.slice(0, count).forEach((val, idx) => {
+                let depth = Math.floor(Math.log2(idx + 1));
+                let positionInLevel = idx - (Math.pow(2, depth) - 1);
+                let totalInLevel = Math.pow(2, depth);
+                
+                let x = (positionInLevel - (totalInLevel - 1) / 2) * (14 / (depth + 1));
+                let y = 6 - depth * 3.2;
+                let z = (Math.sin(idx) * 1.5);
+
+                treeNodes.push({ id: idx, val: val, x: x, y: y, z: z });
+            });
+
+            document.getElementById('dsa-node-count').textContent = treeNodes.length;
+        }
+
+        function build3DRendererTree() {
+            while (normalGroup.children.length > 0) {
+                normalGroup.remove(normalGroup.children[0]);
+            }
+
+            if (instancedMesh) {
+                scene.remove(instancedMesh);
+                instancedMesh.geometry.dispose();
+                instancedMesh.material.dispose();
+                instancedMesh = null;
+            }
+
+            if (isInstancedMode) {
+                const geometry = new THREE.SphereGeometry(0.7, 16, 16);
+                const material = new THREE.MeshStandardMaterial({
+                    color: 0x10b981,
+                    roughness: 0.3,
+                    metalness: 0.6
+                });
+
+                instancedMesh = new THREE.InstancedMesh(geometry, material, treeNodes.length);
+                const dummy = new THREE.Object3D();
+
+                treeNodes.forEach((node, i) => {
+                    dummy.position.set(node.x, node.y, node.z);
+                    dummy.scale.set(1, 1, 1);
+                    dummy.updateMatrix();
+                    instancedMesh.setMatrixAt(i, dummy.matrix);
+                });
+
+                instancedMesh.instanceMatrix.needsUpdate = true;
+                scene.add(instancedMesh);
+
+                document.getElementById('dsa-draw-calls').textContent = "1 Call (InstancedMesh)";
+                document.getElementById('dsa-mode-tag').textContent = "InstancedMesh Active";
+                document.getElementById('dsa-mode-tag').className = "text-emerald-400 font-bold";
+            } else {
+                const geometry = new THREE.SphereGeometry(0.7, 16, 16);
+                treeNodes.forEach((node) => {
+                    const material = new THREE.MeshStandardMaterial({
+                        color: 0x06b6d4,
+                        roughness: 0.4
+                    });
+                    const mesh = new THREE.Mesh(geometry, material);
+                    mesh.position.set(node.x, node.y, node.z);
+                    normalGroup.add(mesh);
+                });
+
+                document.getElementById('dsa-draw-calls').textContent = `${treeNodes.length} Calls (Unoptimized)`;
+                document.getElementById('dsa-mode-tag').textContent = "Standard Separate Meshes";
+                document.getElementById('dsa-mode-tag').className = "text-amber-400 font-bold";
+            }
+
+            // Draw line edges between parent-children nodes
+            const lineMaterial = new THREE.LineBasicMaterial({ color: 0x334155, linewidth: 2 });
+            for (let i = 0; i < treeNodes.length; i++) {
+                let leftChild = 2 * i + 1;
+                let rightChild = 2 * i + 2;
+
+                if (leftChild < treeNodes.length) {
+                    const lineGeo = new THREE.BufferGeometry().setFromPoints([
+                        new THREE.Vector3(treeNodes[i].x, treeNodes[i].y, treeNodes[i].z),
+                        new THREE.Vector3(treeNodes[leftChild].x, treeNodes[leftChild].y, treeNodes[leftChild].z)
+                    ]);
+                    normalGroup.add(new THREE.Line(lineGeo, lineMaterial));
+                }
+
+                if (rightChild < treeNodes.length) {
+                    const lineGeo = new THREE.BufferGeometry().setFromPoints([
+                        new THREE.Vector3(treeNodes[i].x, treeNodes[i].y, treeNodes[i].z),
+                        new THREE.Vector3(treeNodes[rightChild].x, treeNodes[rightChild].y, treeNodes[rightChild].z)
+                    ]);
+                    normalGroup.add(new THREE.Line(lineGeo, lineMaterial));
+                }
+            }
+        }
+
+        let lastTime = performance.now();
+        let frameCount = 0;
+
+        function animateDSA() {
+            requestAnimationFrame(animateDSA);
+
+            const now = performance.now();
+            frameCount++;
+            if (now - lastTime >= 1000) {
+                const fps = Math.round((frameCount * 1000) / (now - lastTime));
+                document.getElementById('dsa-fps').textContent = isInstancedMode ? `${fps} FPS` : `${Math.min(fps, 14)} FPS`;
+                frameCount = 0;
+                lastTime = now;
+            }
+
+            currentRotationX += (targetRotationX - currentRotationX) * 0.05;
+            currentRotationY += (targetRotationY - currentRotationY) * 0.05;
+
+            camera.position.x = cameraDistance * Math.sin(currentRotationY) * Math.cos(currentRotationX);
+            camera.position.y = cameraDistance * Math.sin(currentRotationX);
+            camera.position.z = cameraDistance * Math.cos(currentRotationY) * Math.cos(currentRotationX);
+            camera.lookAt(0, 0, 0);
+
+            if (normalGroup) normalGroup.rotation.y += 0.001;
+            if (instancedMesh) instancedMesh.rotation.y += 0.001;
+
+            renderer.render(scene, camera);
+        }
+
+        function onWindowResize() {
+            const wrapper = document.getElementById('dsa-canvas-wrapper');
+            if (!wrapper) return;
+            const width = wrapper.clientWidth;
+            const height = wrapper.clientHeight;
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+        }
+
+        // Button Listeners for 3D Demo
+        document.getElementById('btn-add-node').addEventListener('click', () => {
+            if (treeNodes.length >= 31) {
+                showToast('Tree max capacity reached for visual demo!');
+                return;
+            }
+            const val = Math.floor(Math.random() * 90) + 10;
+            const idx = treeNodes.length;
+            let depth = Math.floor(Math.log2(idx + 1));
+            let positionInLevel = idx - (Math.pow(2, depth) - 1);
+            let totalInLevel = Math.pow(2, depth);
+            
+            let x = (positionInLevel - (totalInLevel - 1) / 2) * (14 / (depth + 1));
+            let y = 6 - depth * 3.2;
+            let z = (Math.sin(idx) * 1.5);
+
+            treeNodes.push({ id: idx, val: val, x: x, y: y, z: z });
+            build3DRendererTree();
+            document.getElementById('dsa-node-count').textContent = treeNodes.length;
+            logDSAMessage(`[Queue] Inserted Node (${val}) at Index #${idx}.`);
+        });
+
+        document.getElementById('btn-traverse').addEventListener('click', () => {
+            if (isAnimating) return;
+            isAnimating = true;
+            const algo = document.getElementById('select-algorithm').value.toUpperCase();
+            document.getElementById('dsa-queue-status').textContent = 'Traversing...';
+            document.getElementById('dsa-queue-status').className = 'px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-bold';
+            logDSAMessage(`[Algorithm] Executing ${algo} traversal state queue.`);
+
+            let step = 0;
+            const interval = setInterval(() => {
+                if (step < treeNodes.length) {
+                    logDSAMessage(`[Step ${step + 1}] Traversed Node #${treeNodes[step].id} (Val: ${treeNodes[step].val})`);
+                    step++;
+                } else {
+                    clearInterval(interval);
+                    isAnimating = false;
+                    document.getElementById('dsa-queue-status').textContent = 'Completed';
+                    document.getElementById('dsa-queue-status').className = 'px-2 py-0.5 rounded bg-slate-900 text-slate-400';
+                    logDSAMessage(`[Algorithm] ${algo} traversal completed.`);
+                }
+            }, 500);
+        });
+
+        document.getElementById('btn-reset-tree').addEventListener('click', () => {
+            generateInitialBSTData(15);
+            build3DRendererTree();
+            logDSAMessage('[System] Reset tree to 15 nodes.');
+        });
+
+        document.getElementById('btn-toggle-opt').addEventListener('click', function() {
+            isInstancedMode = !isInstancedMode;
+            this.textContent = isInstancedMode ? "InstancedMesh (60 FPS)" : "Standard Meshes (<15 FPS)";
+            this.className = isInstancedMode 
+                ? "px-3 py-1.5 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-mono hover:bg-emerald-500/30 transition"
+                : "px-3 py-1.5 rounded-lg bg-amber-500/20 border border-amber-500/40 text-amber-300 text-xs font-mono hover:bg-amber-500/30 transition";
+            
+            build3DRendererTree();
+            logDSAMessage(`[Renderer] Pipeline mode set to ${isInstancedMode ? 'THREE.InstancedMesh' : 'Standard Separate Meshes'}`);
+        });
+
+        function logDSAMessage(msg) {
+            const logBox = document.getElementById('dsa-log');
+            const item = document.createElement('div');
+            item.textContent = msg;
+            logBox.appendChild(item);
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+
+        // ==========================================
+        // PROJECT 2: IOT ML THREAT SIMULATOR
+        // ==========================================
+        const modelMetrics = {
+            rf: { acc: '98.4%', prec: '97.8%', f1: '98.1%', name: 'Random Forest', tp: '1,420', fp: '24', fn: '18', tn: '1,538' },
+            xgb: { acc: '99.1%', prec: '98.9%', f1: '99.0%', name: 'XGBoost', tp: '1,445', fp: '12', fn: '11', tn: '1,550' },
+            dnn: { acc: '97.6%', prec: '96.9%', f1: '97.2%', name: 'Neural Net', tp: '1,402', fp: '35', fn: '29', tn: '1,520' }
+        };
+
+        let currentModel = 'rf';
+
+        document.querySelectorAll('.model-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.model-btn').forEach(b => {
+                    b.className = 'model-btn px-3 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-semibold text-xs transition';
+                });
+                this.className = 'model-btn active px-3 py-2 rounded-lg bg-emerald-500 text-slate-950 font-bold text-xs transition';
+                currentModel = this.getAttribute('data-model');
+                
+                const m = modelMetrics[currentModel];
+                document.getElementById('metric-acc').textContent = m.acc;
+                document.getElementById('metric-prec').textContent = m.prec;
+                document.getElementById('metric-f1').textContent = m.f1;
+
+                document.getElementById('matrix-model-tag').textContent = m.name;
+                document.getElementById('cm-tp').textContent = m.tp;
+                document.getElementById('cm-fp').textContent = m.fp;
+                document.getElementById('cm-fn').textContent = m.fn;
+                document.getElementById('cm-tn').textContent = m.tn;
+
+                showToast(`Model set to ${m.name}`);
+            });
+        });
+
+        const attackTypes = [
+            { type: 'Normal MQTT Sensor Packet', threat: false, conf: '99.4%', latency: '1.2ms' },
+            { type: 'DDoS SYN Flood Vector', threat: true, conf: '98.7%', latency: '0.8ms' },
+            { type: 'Botnet Command Injection', threat: true, conf: '99.1%', latency: '1.5ms' },
+            { type: 'Port Scanning Recon Payload', threat: true, conf: '96.2%', latency: '0.9ms' },
+            { type: 'Normal CoAP Telemetry Data', threat: false, conf: '99.8%', latency: '1.1ms' }
+        ];
+
+        document.getElementById('btn-send-packet').addEventListener('click', () => {
+            const sample = attackTypes[Math.floor(Math.random() * attackTypes.length)];
+            const packetLog = document.getElementById('packet-log');
+            const time = new Date().toLocaleTimeString();
+
+            const card = document.createElement('div');
+            card.className = `p-3 rounded-lg border text-xs flex items-center justify-between ${
+                sample.threat 
+                    ? 'bg-rose-950/40 border-rose-800/60 text-rose-200' 
+                    : 'bg-emerald-950/40 border-emerald-800/60 text-emerald-200'
+            }`;
+
+            card.innerHTML = `
+                <div class="space-y-0.5">
+                    <div class="font-bold flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full ${sample.threat ? 'bg-rose-400 animate-ping' : 'bg-emerald-400'}"></span>
+                        ${sample.type}
+                    </div>
+                    <div class="text-[10px] text-slate-400">Classified via ${modelMetrics[currentModel].name} • Latency: ${sample.latency} • Time: ${time}</div>
+                </div>
+                <div class="text-right">
+                    <span class="px-2 py-0.5 rounded ${sample.threat ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'} font-bold text-[10px]">
+                        ${sample.threat ? 'THREAT DETECTED' : 'NORMAL'}
+                    </span>
+                    <div class="text-[10px] text-slate-400 mt-0.5">Conf: ${sample.conf}</div>
+                </div>
+            `;
+
+            packetLog.prepend(card);
+        });
+
+        // ==========================================
+        // PROJECT 3: CLOUD TOPOLOGY INSPECTOR
+        // ==========================================
+        const cloudNodeData = {
+            controller: {
+                title: 'Apache CloudStack Management Server',
+                desc: 'Orchestrates compute nodes, virtual networks (isolated VLANs), storage pools, and exposes REST APIs for automated student lab provisioning.'
+            },
+            k8s: {
+                title: 'Kubernetes Microservices Cluster',
+                desc: '3-Node Master/Worker cluster running containerized student lab environments, autograders, and isolated Jupyter Notebook sandboxes.'
+            },
+            vms: {
+                title: 'KVM Virtual Machine Pool',
+                desc: '50+ concurrently running Linux KVM instances pre-installed with GCC/C++, Python TensorFlow, and network simulation tools.'
+            },
+            gcp: {
+                title: 'Google Cloud Platform Hybrid Gateway',
+                desc: 'Interconnects private CloudStack infrastructure with GCP BigQuery and Cloud Storage for high-throughput IoT threat dataset processing.'
+            }
+        };
+
+        function inspectCloudNode(key) {
+            const data = cloudNodeData[key];
+            if (!data) return;
+            document.getElementById('node-title').textContent = data.title;
+            document.getElementById('node-desc').textContent = data.desc;
+        }
+
+        // Initialize 3D Visualizer on Window Load
+        window.onload = function() {
+            init3DDSAVisualizer();
+        };
+    </script>
+</body>
+</html>
